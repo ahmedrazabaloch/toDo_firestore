@@ -64,8 +64,8 @@
   text-transform: capitalize;
 }
 
-#edit_btn,
-#del_btn {
+.edit_btn,
+.del_btn {
   font-size: 1rem;
   padding: 10px 15px;
   border: none;
@@ -73,9 +73,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
-#edit_btn {
+.edit_btn {
   background: #2196f3;
 }
-#del_btn {
+.del_btn {
   background-color: #d9534f;
 }
