@@ -11,27 +11,6 @@ import {
 
 let input = document.getElementById("input");
 let list_item = document.getElementById("list_item");
-//getting data from FireStore
-const getData = async () => {
-  const ref = collection(db, "todos");
-  const unsubscribe = onSnapshot(ref, (querySnapshot) => {
-    list_item.innerHTML = "";
-    querySnapshot.forEach((doc) => {
-      list_item.innerHTML += `
-        <div class="list_item">
-          <div>
-            <p class="para">${doc.data().value}</p>
-          </div>
-          <div>
-            <button class="edit_btn">Edit</button>
-            <button class="del_btn">Delete</button>
-          </div>
-        </div>
-      `;
-    });
-  });
-};
-getData();
 // Show data in UI
 const addItem = async (e) => {
   e.preventDefault();
@@ -66,7 +45,7 @@ const addData = async () => {
   });
   console.log("Document written with ID: ", docRef.id);
 };
-//getting butting event listener
+//Button event listener
 const addEventListeners = () => {
   let editButtons = document.querySelectorAll(".edit_btn");
   let deleteButtons = document.querySelectorAll(".del_btn");
@@ -83,6 +62,7 @@ const addEventListeners = () => {
     });
   });
 };
+
 //Edit Button
 const editItem = (index) => {
   let newValue = prompt("Enter new value:");
@@ -107,5 +87,26 @@ var deleteItem = (index) => {
 
 const addItem_btn = document.getElementById("addItem_btn");
 addItem_btn.addEventListener("click", addItem);
-
 addEventListeners();
+
+//Getting data from FireStore
+const getData = async () => {
+  const ref = query(collection(db, "todos"), orderBy("timestamp", "desc"));
+  const unsubscribe = onSnapshot(ref, (querySnapshot) => {
+    list_item.innerHTML = "";
+    querySnapshot.forEach((doc) => {
+      list_item.innerHTML += `
+        <div class="list_item">
+          <div>
+            <p class="para">${doc.data().value}</p>
+          </div>
+          <div>
+            <button class="edit_btn">Edit</button>
+            <button class="del_btn">Delete</button>
+          </div>
+        </div>
+      `;
+    });
+  });
+};
+getData();
