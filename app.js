@@ -1,15 +1,16 @@
+import { collection, addDoc, db } from "./firebase.js";
+
 let input = document.getElementById("input");
 let count = 1;
 let list_item = document.getElementById("list_item");
 
-const addItem = (e) => {
+const addItem = async (e) => {
   e.preventDefault();
   if (input.value.trim() !== "") {
     if (count < 6 && input.value.length < 20) {
       list_item.innerHTML += `
         <div class="list_item">
           <div>
-            <p>${count} - </p>
             <p class="para">${input.value}</p>
           </div>
           <div>
@@ -20,6 +21,11 @@ const addItem = (e) => {
       `;
       count++;
       addEventListeners();
+      //Firestore
+      const docRef = await addDoc(collection(db, "todos"), {
+        value: input.value,
+      });
+      console.log("Document written with ID: ", docRef.id);
     } else {
       alert("Reached the count");
     }
@@ -59,13 +65,17 @@ const editItem = (index) => {
     alert("Can't add an empty value");
   }
 };
-
-const deleteItem = (index) => {
-  let items = document.querySelectorAll(".list_item");
-  items[index].remove();
-  index--;
-  count--;
-};
+try {
+  var deleteItem = (index) => {
+    let items = document.querySelectorAll(".list_item");
+    console.log("items[index]", items[index]);
+    items[index].remove();
+    index--;
+    count--;
+  };
+} catch (err) {
+  console.log("catch error-->", err);
+}
 
 const addItem_btn = document.getElementById("addItem_btn");
 addItem_btn.addEventListener("click", addItem);
