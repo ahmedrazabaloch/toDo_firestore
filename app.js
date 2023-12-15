@@ -1,13 +1,42 @@
-import { collection, addDoc, db } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  db,
+  serverTimestamp,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+} from "./firebase.js";
 
 let input = document.getElementById("input");
-let count = 1;
 let list_item = document.getElementById("list_item");
-
+//getting data from FireStore
+const getData = async () => {
+  const ref = collection(db, "todos");
+  const unsubscribe = onSnapshot(ref, (querySnapshot) => {
+    list_item.innerHTML = "";
+    querySnapshot.forEach((doc) => {
+      list_item.innerHTML += `
+        <div class="list_item">
+          <div>
+            <p class="para">${doc.data().value}</p>
+          </div>
+          <div>
+            <button class="edit_btn">Edit</button>
+            <button class="del_btn">Delete</button>
+          </div>
+        </div>
+      `;
+    });
+  });
+};
+getData();
+// Show data in UI
 const addItem = async (e) => {
   e.preventDefault();
   if (input.value.trim() !== "") {
-    if (count < 6 && input.value.length < 20) {
+    if (input.value.length < 20) {
       list_item.innerHTML += `
         <div class="list_item">
           <div>
@@ -19,22 +48,25 @@ const addItem = async (e) => {
           </div>
         </div>
       `;
-      count++;
       addEventListeners();
-      //Firestore
-      const docRef = await addDoc(collection(db, "todos"), {
-        value: input.value,
-      });
-      console.log("Document written with ID: ", docRef.id);
+      addData();
     } else {
-      alert("Reached the count");
+      alert("value should be lower 22 leter");
     }
   } else {
     alert("Can't add an empty value");
   }
   input.value = "";
 };
-
+//Sending data to firestore
+const addData = async () => {
+  const docRef = await addDoc(collection(db, "todos"), {
+    value: input.value,
+    timestamp: serverTimestamp(),
+  });
+  console.log("Document written with ID: ", docRef.id);
+};
+//getting butting event listener
 const addEventListeners = () => {
   let editButtons = document.querySelectorAll(".edit_btn");
   let deleteButtons = document.querySelectorAll(".del_btn");
@@ -51,7 +83,7 @@ const addEventListeners = () => {
     });
   });
 };
-
+//Edit Button
 const editItem = (index) => {
   let newValue = prompt("Enter new value:");
   if (newValue !== null) {
@@ -65,17 +97,13 @@ const editItem = (index) => {
     alert("Can't add an empty value");
   }
 };
-try {
-  var deleteItem = (index) => {
-    let items = document.querySelectorAll(".list_item");
-    console.log("items[index]", items[index]);
-    items[index].remove();
-    index--;
-    count--;
-  };
-} catch (err) {
-  console.log("catch error-->", err);
-}
+//Delete button
+var deleteItem = (index) => {
+  let items = document.querySelectorAll(".list_item");
+  console.log("items[index]", items[index]);
+  items[index].remove();
+  index--;
+};
 
 const addItem_btn = document.getElementById("addItem_btn");
 addItem_btn.addEventListener("click", addItem);

@@ -3,6 +3,12 @@ import {
   getFirestore,
   collection,
   addDoc,
+  doc,
+  onSnapshot,
+  query,
+  where,
+  serverTimestamp,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -17,4 +23,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export { db, collection, addDoc };
+export {
+  db,
+  collection,
+  addDoc,
+  doc,
+  onSnapshot,
+  query,
+  where,
+  serverTimestamp,
+  orderBy
+};
