@@ -86,12 +86,14 @@ const deleteItem = async (index) => {
   const documents = querySnapshot.docs;
   const docId = documents[index].id;
   await deleteDoc(doc(db, "todos", docId));
+  console.log("docId-->", docId);
+  console.log("documents[index]-->", documents[index]);
 };
 
 const addItem_btn = document.getElementById("addItem_btn");
 addItem_btn.addEventListener("click", addItem);
 
-//Getting data from FireStore
+//Getting data from FireStore & Display
 const getData = async () => {
   const ref = query(collection(db, "todos"), orderBy("timestamp", "desc"));
   const unsubscribe = onSnapshot(ref, (querySnapshot) => {
