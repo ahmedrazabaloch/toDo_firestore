@@ -6,11 +6,11 @@ import {
   doc,
   onSnapshot,
   query,
-  where,
   serverTimestamp,
   orderBy,
   getDocs,
   deleteDoc,
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -32,9 +32,9 @@ export {
   doc,
   onSnapshot,
   query,
-  where,
   serverTimestamp,
   orderBy,
   getDocs,
   deleteDoc,
+  updateDoc,
 };

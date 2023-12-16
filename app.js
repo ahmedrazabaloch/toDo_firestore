@@ -5,11 +5,11 @@ import {
   serverTimestamp,
   onSnapshot,
   query,
-  where,
   orderBy,
   getDocs,
   deleteDoc,
   doc,
+  updateDoc,
 } from "./firebase.js";
 
 let input = document.getElementById("input");
@@ -66,14 +66,27 @@ const addEventListeners = () => {
 };
 addEventListeners();
 //Edit Button
-const editItem = (index) => {
+const editItem = async (index) => {
   let newValue = prompt("Enter new value:");
+
   if (newValue !== null) {
     if (newValue.length < 20) {
+      // Update Firestore data
+      const ref = query(collection(db, "todos"), orderBy("timestamp", "desc"));
+      const querySnapshot = await getDocs(ref);
+      const documents = querySnapshot.docs;
+      const docId = documents[index].id;
+
+      await updateDoc(doc(db, "todos", docId), {
+        value: newValue,
+        timestamp: serverTimestamp(),
+      });
+
+      // Update UI
       let paragraphs = document.querySelectorAll(".para");
       paragraphs[index].textContent = newValue;
     } else {
-      alert("value should be lower 22 leter");
+      alert("Value should be less than 20 characters");
     }
   } else {
     alert("Can't add an empty value");
@@ -86,8 +99,6 @@ const deleteItem = async (index) => {
   const documents = querySnapshot.docs;
   const docId = documents[index].id;
   await deleteDoc(doc(db, "todos", docId));
-  console.log("docId-->", docId);
-  console.log("documents[index]-->", documents[index]);
 };
 
 const addItem_btn = document.getElementById("addItem_btn");
