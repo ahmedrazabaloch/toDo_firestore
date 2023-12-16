@@ -7,6 +7,9 @@ import {
   query,
   where,
   orderBy,
+  getDocs,
+  deleteDoc,
+  doc,
 } from "./firebase.js";
 
 let input = document.getElementById("input");
@@ -43,7 +46,6 @@ const addData = async () => {
     value: input.value,
     timestamp: serverTimestamp(),
   });
-  console.log("Document written with ID: ", docRef.id);
 };
 //Button event listener
 const addEventListeners = () => {
@@ -62,7 +64,7 @@ const addEventListeners = () => {
     });
   });
 };
-
+addEventListeners();
 //Edit Button
 const editItem = (index) => {
   let newValue = prompt("Enter new value:");
@@ -78,16 +80,16 @@ const editItem = (index) => {
   }
 };
 //Delete button
-var deleteItem = (index) => {
-  let items = document.querySelectorAll(".list_item");
-  console.log("items[index]", items[index]);
-  items[index].remove();
-  index--;
+const deleteItem = async (index) => {
+  const ref = query(collection(db, "todos"), orderBy("timestamp", "desc"));
+  const querySnapshot = await getDocs(ref);
+  const documents = querySnapshot.docs;
+  const docId = documents[index].id;
+  await deleteDoc(doc(db, "todos", docId));
 };
 
 const addItem_btn = document.getElementById("addItem_btn");
 addItem_btn.addEventListener("click", addItem);
-addEventListeners();
 
 //Getting data from FireStore
 const getData = async () => {
@@ -107,6 +109,7 @@ const getData = async () => {
         </div>
       `;
     });
+    addEventListeners();
   });
 };
 getData();
