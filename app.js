@@ -55,7 +55,6 @@ const addEventListeners = () => {
     });
   });
 };
-// addEventListeners();
 
 //Edit Button
 const editItem = async (index) => {
