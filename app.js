@@ -12,18 +12,21 @@ import {
   updateDoc,
 } from "./firebase.js";
 
+//Sending data to firestore
 let input = document.getElementById("input");
 let list_item = document.getElementById("list_item");
-//Sending data to firestore
+
 const addItem = async (e) => {
   e.preventDefault();
+
   if (input.value.trim() !== "") {
     if (input.value.length < 20) {
+ 
       const docRef = await addDoc(collection(db, "todos"), {
         value: input.value,
         timestamp: serverTimestamp(),
       });
-      addEventListeners();
+  
     } else {
       alert("value should be lower 22 leter");
     }
@@ -52,7 +55,7 @@ const addEventListeners = () => {
     });
   });
 };
-addEventListeners();
+// addEventListeners();
 
 //Edit Button
 const editItem = async (index) => {
