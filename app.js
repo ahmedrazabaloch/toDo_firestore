@@ -14,24 +14,16 @@ import {
 
 let input = document.getElementById("input");
 let list_item = document.getElementById("list_item");
-// Show data in UI
+//Sending data to firestore
 const addItem = async (e) => {
   e.preventDefault();
   if (input.value.trim() !== "") {
     if (input.value.length < 20) {
-      list_item.innerHTML += `
-        <div class="list_item">
-          <div>
-            <p class="para">${input.value}</p>
-          </div>
-          <div>
-            <button class="edit_btn">Edit</button>
-            <button class="del_btn">Delete</button>
-          </div>
-        </div>
-      `;
+      const docRef = await addDoc(collection(db, "todos"), {
+        value: input.value,
+        timestamp: serverTimestamp(),
+      });
       addEventListeners();
-      addData();
     } else {
       alert("value should be lower 22 leter");
     }
@@ -40,13 +32,9 @@ const addItem = async (e) => {
   }
   input.value = "";
 };
-//Sending data to firestore
-const addData = async () => {
-  const docRef = await addDoc(collection(db, "todos"), {
-    value: input.value,
-    timestamp: serverTimestamp(),
-  });
-};
+const addItem_btn = document.getElementById("addItem_btn");
+addItem_btn.addEventListener("click", addItem);
+
 //Button event listener
 const addEventListeners = () => {
   let editButtons = document.querySelectorAll(".edit_btn");
@@ -65,6 +53,7 @@ const addEventListeners = () => {
   });
 };
 addEventListeners();
+
 //Edit Button
 const editItem = async (index) => {
   let newValue = prompt("Enter new value:");
@@ -92,6 +81,7 @@ const editItem = async (index) => {
     alert("Can't add an empty value");
   }
 };
+
 //Delete button
 const deleteItem = async (index) => {
   const ref = query(collection(db, "todos"), orderBy("timestamp", "desc"));
@@ -100,9 +90,6 @@ const deleteItem = async (index) => {
   const docId = documents[index].id;
   await deleteDoc(doc(db, "todos", docId));
 };
-
-const addItem_btn = document.getElementById("addItem_btn");
-addItem_btn.addEventListener("click", addItem);
 
 //Getting data from FireStore & Display
 const getData = async () => {
