@@ -79,3 +79,34 @@
 .del_btn {
   background-color: #d9534f;
 }
+@media screen and (max-width: 425px) {
+  .container label {
+    font-size: 1.8rem;
+  }
+  #input {
+    font-size: 1.5rem;
+  }
+  #addItem_btn {
+    font-size: 1.1rem;
+  }
+  .list_item div:first-child {
+    font-size: 1.3rem;
+    width: 60%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .edit_btn,
+  .del_btn {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+  .container label {
+    font-size: 1.6rem;
+  }
+  #input {
+    font-size: 1.1rem;
+  }
+  .list_item div:first-child {
+    font-size: 1.1rem;
+  }
+}
