@@ -60,6 +60,7 @@ div#list_item {
 .list_item {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   align-items: center;
   padding: 10px 0;
   border-radius: 5px;
@@ -156,13 +157,13 @@ div#list_item {
     font-size: 1.3rem;
     width: 60%;
   }
-}
-@media screen and (max-width: 320px) {
   .edit_btn,
   .del_btn {
     font-size: 0.8rem;
     padding: 10px;
   }
+}
+@media screen and (max-width: 375px) {
   .container label {
     font-size: 1.6rem;
   }
@@ -170,6 +171,9 @@ div#list_item {
     font-size: 1.1rem;
   }
   .list_item div:first-child {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
   }
 }
