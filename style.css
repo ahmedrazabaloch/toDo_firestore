@@ -7,7 +7,6 @@
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  background-color: #292d3e;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,8 +16,10 @@
   padding: 20px;
   place-self: center;
   text-align: center;
-  background-color: azure;
+  background-color: #ffa500;
   border-radius: 10px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 .container label {
   font-size: 2.5rem;
@@ -45,16 +46,24 @@
   font-size: 1.5rem;
   padding: 5px 20px;
   border: none;
-  background: #5cb85c;
-  color: white;
+  background: #32cd32;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 600;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+div#list_item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .list_item {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 25px;
+  padding: 10px 0;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .list_item div:first-child {
   width: 70%;
@@ -70,9 +79,9 @@
   font-size: 1rem;
   padding: 10px 15px;
   border: none;
-  color: white;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 600;
 }
 .edit_btn {
   background: #2196f3;

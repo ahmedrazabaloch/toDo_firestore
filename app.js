@@ -21,12 +21,10 @@ const addItem = async (e) => {
 
   if (input.value.trim() !== "") {
     if (input.value.length < 20) {
- 
       const docRef = await addDoc(collection(db, "todos"), {
         value: input.value,
         timestamp: serverTimestamp(),
       });
-  
     } else {
       alert("value should be lower 22 leter");
     }
@@ -39,7 +37,7 @@ const addItem_btn = document.getElementById("addItem_btn");
 addItem_btn.addEventListener("click", addItem);
 
 //Button event listener
-const addEventListeners = () => {
+const getElements = () => {
   let editButtons = document.querySelectorAll(".edit_btn");
   let deleteButtons = document.querySelectorAll(".del_btn");
 
@@ -111,7 +109,7 @@ const getData = async () => {
         </div>
       `;
     });
-    addEventListeners();
+    getElements();
   });
 };
 getData();
