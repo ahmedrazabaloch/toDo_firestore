@@ -16,7 +16,7 @@
   padding: 20px;
   place-self: center;
   text-align: center;
-  background-color: #ffa500;
+  /* background-color: #ffa500; */
   border-radius: 10px;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
@@ -45,8 +45,8 @@
 #addItem_btn {
   font-size: 1.5rem;
   padding: 5px 20px;
-  border: none;
-  background: #32cd32;
+  border: 1px solid;
+  background-color: transparent;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
@@ -83,12 +83,8 @@ div#list_item {
   border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
-}
-.edit_btn {
-  background: #2196f3;
-}
-.del_btn {
-  background-color: #d9534f;
+  background: transparent;
+  border: 1px solid;
 }
 
 /* lodaer CSS */
@@ -100,7 +96,7 @@ div#list_item {
   display: block;
   margin: 15px auto;
   position: relative;
-  color: #fff;
+  color: #000;
   left: -100px;
   box-sizing: border-box;
   animation: shadowRolling 2s linear infinite;
@@ -112,31 +108,31 @@ div#list_item {
       0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
   }
   12% {
-    box-shadow: 100px 0 white, 0px 0 rgba(255, 255, 255, 0),
+    box-shadow: 100px 0 black, 0px 0 rgba(255, 255, 255, 0),
       0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
   }
   25% {
-    box-shadow: 110px 0 white, 100px 0 white, 0px 0 rgba(255, 255, 255, 0),
+    box-shadow: 110px 0 black, 100px 0 black, 0px 0 rgba(255, 255, 255, 0),
       0px 0 rgba(255, 255, 255, 0);
   }
   36% {
-    box-shadow: 120px 0 white, 110px 0 white, 100px 0 white,
+    box-shadow: 120px 0 black, 110px 0 black, 100px 0 black,
       0px 0 rgba(255, 255, 255, 0);
   }
   50% {
-    box-shadow: 130px 0 white, 120px 0 white, 110px 0 white, 100px 0 white;
+    box-shadow: 130px 0 black, 120px 0 black, 110px 0 black, 100px 0 black;
   }
   62% {
-    box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 white, 120px 0 white,
-      110px 0 white;
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 black, 120px 0 black,
+      110px 0 black;
   }
   75% {
     box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
-      130px 0 white, 120px 0 white;
+      130px 0 black, 120px 0 black;
   }
   87% {
     box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
-      200px 0 rgba(255, 255, 255, 0), 130px 0 white;
+      200px 0 rgba(255, 255, 255, 0), 130px 0 black;
   }
   100% {
     box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
