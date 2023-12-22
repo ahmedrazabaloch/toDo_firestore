@@ -20,7 +20,7 @@ const addItem = async (e) => {
   e.preventDefault();
 
   if (input.value.trim() !== "") {
-    if (input.value.length < 20) {
+    if (input.value.length < 23) {
       const docRef = await addDoc(collection(db, "todos"), {
         value: input.value,
         timestamp: serverTimestamp(),
@@ -59,7 +59,7 @@ const editItem = async (index) => {
   let newValue = prompt("Enter new value:");
 
   if (newValue !== null) {
-    if (newValue.length < 20) {
+    if (newValue.length < 23) {
       // Update Firestore data
       const ref = query(collection(db, "todos"), orderBy("timestamp", "desc"));
       const querySnapshot = await getDocs(ref);
