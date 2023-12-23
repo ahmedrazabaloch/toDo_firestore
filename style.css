@@ -10,13 +10,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #E8E8E8;
 }
 .box {
   width: 550px;
   padding: 20px;
   place-self: center;
   text-align: center;
-  /* background-color: #ffa500; */
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
