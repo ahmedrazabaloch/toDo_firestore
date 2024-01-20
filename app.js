@@ -26,13 +26,33 @@ const addItem = async (e) => {
         timestamp: serverTimestamp(),
       });
     } else {
-      alert("value should be lower 22 leter");
+      Swal.fire({
+        title: "Value should lessthen 22 leter",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
     }
   } else {
-    alert("Can't add an empty value");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Can't add an empty value",
+    });
   }
   input.value = "";
-};
+}
 const addItem_btn = document.getElementById("addItem_btn");
 addItem_btn.addEventListener("click", addItem);
 
